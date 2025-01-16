@@ -1,12 +1,12 @@
 # Underwater Colorimetry - 2025
-                                   Course GitHub - All required data, scripts and instructions for the course labs is available in this repository
+  Course GitHub - All required data, scripts and instructions for the course labs is available in this repository
 
-                                                         Lab 1: Basic Image Formation & RAW Image Manipulation
+              Lab 1: Basic Image Formation & RAW Image Manipulation
 
-                                                         Lab 2: Basic Colorimetry
+              Lab 2: Basic Colorimetry
 
-                                                         Lab 3: Underwater Photogrammetry
+              Lab 3: Underwater Photogrammetry
 
-                                                         Lab 4: Underwater Image Formation
+              Lab 4: Underwater Image Formation
 
-                                                         Lab 5: Calculating attenuation coefficients from light profile
+              Lab 5: Calculating attenuation coefficients from light profile
