@@ -9,4 +9,6 @@
 
               Lab 4: Underwater Image Formation
 
-              Lab 5: Calculating attenuation coefficients from light profile
+              Lab 5: Calculating Attenuation Coefficients From Light Profile
+
+              Project: Underwater Color Reconstructions - Inverse Underwater Image Formation
