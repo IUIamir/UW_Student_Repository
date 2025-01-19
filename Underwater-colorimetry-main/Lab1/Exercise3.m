@@ -19,10 +19,19 @@ clear all; close all; clc;
 
 
 %% Step 1 - Simulate a Macbeth ColorChecker
-% Use the function importdata to read the csv files. 
-% The importdata function will create a struct with fields: 
-% data, textdata, rowheaders. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%       Use the function importdata to read the csv files.     %
+
+
+% The importdata function will create a struct with fields:    %
+
+%     - data                                                   % 
+%     - textdata                                               %
+%     - rowheaders                                             %  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -149,6 +158,7 @@ fprintf('Figure saved to %s\n', fullfile(save_path, 'Macbeth_sim.png'));
 % You should end up with 4 figures of combinations of Illuminant A and D65
 % as well as the Nikon and Canon camera.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%        Simulated Nikon images         %%%
 %
@@ -160,7 +170,7 @@ fprintf('Figure saved to %s\n', fullfile(save_path, 'Macbeth_sim.png'));
 %                3. White Balanced image
 %                4. Not white balanced image
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%        Simulated Cannon images        %%%
 %

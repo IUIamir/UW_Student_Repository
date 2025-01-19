@@ -29,10 +29,10 @@ clear all; close all;clc; warning off
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% You should have 3 .png images:                                    % 
-%    - Your_image_with_a_color_chart.png                            %
-%    - NikonImage.png                                               %
-%    - CanonImage.png                                               %
+% You should have 3 .png images:
+%    - Your_image_with_a_color_chart.png 
+%    - NikonImage.png
+%    - CanonImage.png
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
