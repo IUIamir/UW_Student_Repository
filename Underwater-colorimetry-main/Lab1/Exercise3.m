@@ -43,11 +43,14 @@ refl.data(1,:)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 cam = importdata('data/Nikon_D90.csv');
+
+
 % Again, inspect the wavelength ranges, this dataset is 400:10:700. 
 % This commend will print out the wavelength range:
 cam.data(:,1)
 
 % Don't forget to also load the second camera!
+ 
 
 
 
@@ -126,7 +129,7 @@ montage({mcc, mcc_wb}, 'BorderSize', [0 20], 'BackgroundColor', [0.9 0.9 0.9])
 
 
 
-% Saving the figures:
+%% Saving the figures:
 % This line saves the figure, change the image name as you see fit
 
 % Remember to change name when changing illuminant !!!!
@@ -138,7 +141,7 @@ fprintf('Figure saved to %s\n', fullfile(save_path, 'Macbeth_sim.png'));
  
 
 
-
+%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%  Include In Your Report - Exercise 3  %%%

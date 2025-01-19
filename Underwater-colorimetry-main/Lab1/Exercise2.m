@@ -21,6 +21,11 @@ clear all; close all;clc; warning off
 
 
 %% LOAD A LINEAR PNG IMAGE THAT HAS A CALIBRATION TARGET (Color Chart) IN THE SCENE
+% 'NikonImage.png' is an example image, you can run the scrit to see what 
+% is the expected outut. 
+% 
+% After you run the script with the 'NikonImage.png', change it to your 
+% image from exercie 1!
 
 I = im2double(imread('NikonImage.png'));
 
@@ -35,6 +40,14 @@ title('Linear image','fontsize',20)
 
 load MacbethColorCheckerData.mat
 
+% Location of grey patches in Macbeth ColorChecker.
+neutralPatches = [4 1; 4 2; 4 3; 4 4; 4 5; 4 6]; 
+
+% Y value of grey patches of a Macbeth ColorChecker.
+neutralTarget = [89.57 57.76 35.15 19.44 9.08 3.43]./100; 
+
+% Modify these to work for your color chart, if different than a Macbeth
+% ColorChecker.
 
 
 %% MAKE MASKS FOR THE PATCHES OF THE COLOR CHART
@@ -71,25 +84,9 @@ fprintf('Masks struct has been saved to %s\n', saveFile);
 
 
 
-%% CHECK THE LINEARITY OF CAMERA RESPONSE 
-% If you started with a raw images (i.e, used Adobe DNG converter to
-% demosaic it) your image is linear, or should be. 
+%% CHECK THE LINEARITY OF CAMERA RESPONSE  
 % In this cell we will validate image linearity.
 
-
-% The location and Y values for gray neutral (gray) patches given here 
-% are for those in the last row of a Macbeth ColorChecker.
-
-% Modify these to work for your color chart, if different than a Macbeth
-% ColorChecker.
-
-
-
-% Location of patches
-neutralPatches = [4 1; 4 2; 4 3; 4 4; 4 5; 4 6]; 
-
-% Y value of patches, published or measured
-neutralTarget = [89.57 57.76 35.15 19.44 9.08 3.43]./100; 
 
 % RGB values extracted from patches 
 % Dimensions 3 x size(neutralPatches,1)
