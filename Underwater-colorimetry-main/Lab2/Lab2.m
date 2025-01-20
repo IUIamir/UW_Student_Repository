@@ -16,6 +16,7 @@
 %           Exercise 2: RGB to XYZ transformation
 %           Exercise 3: xy white point coordinates
 %           Exercise 4: XYZ to Standard RGB transformation
+%           Exercise 5: RAW and JPG comparison (Bonus)
 
 
 clear all; close all; clc; 
@@ -42,7 +43,7 @@ canon = importdata('data/Canon_1Ds-Mk-II.csv');
 
 
 % Uploading light data (illuminant-A)
-light = importdata('data/illuminant-A.csv');
+light = importdata('data/illuminant-D65.csv');
 
 % Wavelength range 400-700[nm]
 WL = 400:10:700;
@@ -67,7 +68,9 @@ rgb_canon = getradiance(refl_spectra, light_spectra, canon.data(:,2:end));
 
 
 
-% Plot results
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%              Plot results              %  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -127,7 +130,7 @@ stdobs_spectra = interp1(stdobs(:,1),stdobs(:,2:4),WL);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%                         get XYZ values 
+%                         Get XYZ values 
 
 %    This is similar to getting radiance values when using a camera,   %
 % with the only differnce of using the sensitivity of CIE std observer %
@@ -146,18 +149,6 @@ XYZ_wb = XYZ./XYZ_light;
 
 
 
-%%%%%%%%%%%%%
-%%% Canon %%%
-%%%%%%%%%%%%%
-
-% Select an achromatic patch with which to white balance.
-% Let's pick the 23rd gray, with 9% reflectance but experiment with
-% different patches!
-wbpatch = rgb_canon(23,:); 
-
-% perform simple white balancing for rgb
-rgb_wb_canon = 0.09*rgb_canon./repmat(wbpatch,[size(rgb_canon,1),1]);
-
 
 
 
@@ -170,6 +161,19 @@ rgb_wb_canon = 0.09*rgb_canon./repmat(wbpatch,[size(rgb_canon,1),1]);
 %                  camera RGB to white balanced XYZ                   %
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+%%% Canon %%%
+%%%%%%%%%%%%%
+
+% Select an achromatic patch with which to white balance.
+% Let's pick the 23rd gray, with 9% reflectance but experiment with
+% different patches!
+wbpatch = rgb_canon(23,:); 
+
+% perform simple white balancing for rgb
+rgb_wb_canon = 0.09*rgb_canon./repmat(wbpatch,[size(rgb_canon,1),1]);
+
 
 T_canon=XYZ_wb'*pinv(rgb_wb_canon)';
 xyz_image_canon = (T_canon*rgb_wb_canon')';
@@ -227,7 +231,8 @@ xy_image_nikon = xyz_image_nikon./sum(xyz_image_nikon,2);
 
 
 %% Exercise 3: xy white point coordinates
-% We are plotting the white point on top of the previous chromaticity diagram we drew
+% We are plotting the white point on top of the previous 
+% chromaticity diagram we drew
 hold on
 plot(xy_light(:,1),xy_light(:,2),'k^','markersize',10,'linewidth',3)
 
@@ -248,6 +253,14 @@ plot(xy_light(:,1),xy_light(:,2),'k^','markersize',10,'linewidth',3)
 % Calculate camera xyz to sRGB
 sRGB_canon = xyz2rgb(xyz_image_canon);
 sRGB_nikon = xyz2rgb(xyz_image_nikon);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Add the xyz2rgb() transformation for your GoPro's XYZ values %%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 % Plot results 
 figure
@@ -308,3 +321,56 @@ ylabel('Intensity')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+%% Exercise 5: RAW and JPG comparison (Bonus)
+I_png = im2double(imread('NikonImage.png'));
+% I_jpg = im2double(imread('NikonImage.jpg'));
+
+montage({I_png, I_jpg})
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LOAD COLOR CHART DATA %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+load MacbethColorCheckerData.mat
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% MAKE MASKS FOR THE PATCHES OF THE COLOR CHART %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Generate masks using makeChartMask function
+
+masks_png = makeChartMask(3*I_png,chart,colors,20);
+masks_jpg = makeChartMask(I_jpg,chart,colors,20);
+
+Patches_Loacation = [ ...
+    1 1; 1 2; 1 3; 1 4; 1 5; 1 6; ...
+    2 1; 2 2; 2 3; 2 4; 2 5; 2 6; ...
+    3 1; 3 2; 3 3; 3 4; 3 5; 3 6; ...
+    4 1; 4 2; 4 3; 4 4; 4 5; 4 6
+    ];
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Get RGB values from each patch %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% RGB values extracted from patches 
+% Dimensions 3 x size(neutralPatches,1)
+
+RGB_png_Image = getPatchValues(I_png,masks_png,Patches_Loacation,colors);
+RGB_jpg_Image = getPatchValues(I_jpg,masks_png,Patches_Loacation,colors);
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Add a plot similar to the one in Exercise 1 and compare RGB valuse of %
+%            each patch from the linear png vs. the jpg                 %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
