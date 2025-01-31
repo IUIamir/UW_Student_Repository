@@ -4,7 +4,7 @@ function mcc = visualizeColorChecker(RGB)
 % The input colors are expected to be in the right (typical) order for a
 % Macbeth ColorChecker.
 
-for i = 1:24
+for i = 1:18
     imgs{i} = visualizeColor(RGB(i,:),100);
 end
 
