@@ -1,4 +1,4 @@
-# Underwater Colorimetry - 2025
+# Underwater Colorimetry - 2026
   Course GitHub - All required data, scripts and instructions for the course labs is available in this repository
 
               Lab 1: RAW Image Manipulation & Basic Image Formation
