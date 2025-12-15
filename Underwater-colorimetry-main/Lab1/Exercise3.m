@@ -22,19 +22,21 @@ clear all; close all; clc;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Load the reflectances %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The data will be 25 x 81, where 1st row is wavelength, and
-% rows 2-25 are the patches of the color checker.
+% The data will be 25 x 81, where 1st row is wavelength (in nm) and
+% rows 2-25 are the patches of the ColorChecker.
+% Tip: keep this file in the Lab1/data folder so relative paths work.
 refl = importdata('data/MacbethColorCheckerReflectances.csv');
 % Inspect the data — pay attention that the wavelength range is 380:5:780.
-% This commend will print out the wavelength range:
+% This command will print out the wavelength range so you can confirm.
 refl.data(1,:)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Load the relevant camera's curves %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Start with Nikon, but you will repeat these steps for Canon later.
 cam = importdata('data/Nikon_D90.csv');
-% Again, inspect the wavelength ranges, this dataset is 400:10:700. 
-% This commend will print out the wavelength range:
+% Again, inspect the wavelength ranges, this dataset is 400:10:700.
+% This command will print out the wavelength range:
 cam.data(:,1)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Don't forget to also load the second camera!  %
@@ -43,23 +45,22 @@ cam.data(:,1)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Load the light data %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Uploading illuminant-D65 as: Illuminant_D65
+% Upload illuminant-D65 as Illuminant_D65 (daylight-like spectrum)
 Illuminant_D65 = importdata('data/illuminant-D65.csv');
 
 % Inspect the wavelength ranges. This dataset is 300:5:830 nm.
 Illuminant_D65.data(:,1)
 
-% Uploading illuminant-A as: Illuminant_A
+% Upload illuminant-A as Illuminant_A (tungsten/incandescent-like)
 Illuminant_A = importdata('data/illuminant-A.csv');
 Illuminant_A.data(:,1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Interpolating wavelength to 400:10:700 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% This is quite common. 
-% We will have to interpolate to a common range of 400:10:700 
-% (corresponding to the camera, as that appears to be the coarsest) 
-% as follows:
+% Why interpolate? Each dataset reports different wavelength samples.
+% To multiply spectra element-wise, everything must share the same
+% wavelength grid. We choose 400:10:700 because it matches the cameras.
 WL = 400:10:700;
 refl_spectra = (interp1(refl.data(1,:)',refl.data(2:end,:)',WL))';
 
@@ -70,22 +71,23 @@ light_spectra_D65 = interp1(Illuminant_D65.data(:,1),Illuminant_D65.data(:,2),WL
 % Illuminant-A
 light_spectra_A = interp1(Illuminant_A.data(:,1),Illuminant_A.data(:,2),WL);
 
-% Both illuminants D-65 and A.
+% Both illuminants D-65 and A. Row 1 = D65, Row 2 = A.
 light_spectra = [light_spectra_D65; light_spectra_A];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Calculate radiance for the ColorChecker %%% 
+%%% Calculate radiance for the ColorChecker %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This calculation is for a given illuminant and a given camera!!!
-% for illuminant-D65 use: light_spectra(1,:).
-% for illuminant-A use: light_spectra(2,:).
+% Example below uses Illuminant D65 (row 1) with Nikon (cam variable).
+% Swap to light_spectra(2,:) when simulating Illuminant A.
 rgb = getradiance(refl_spectra, light_spectra(1,:), cam.data(:,2:end));
 
 % Visualize the resulting colors
 mcc = visualizeColorChecker(mat2gray(rgb));
 figure;imshow(mcc)
 
-% This line saves the figure:
+% This line saves the figure (uncomment to enable). Update the filename
+% to avoid overwriting when you switch illuminants or cameras.
 % saveas(gcf,'data/Macbeth_no_wb.png');
 
 % Select an achromatic (gray) patch with which to white balance.
@@ -93,7 +95,9 @@ figure;imshow(mcc)
 % different patches!
 wbpatch = rgb(23,:); 
 
-% perform simple white balancing 
+% Perform simple white balancing by scaling each channel so the chosen
+% gray patch maps to 9% reflectance. Experiment with other patches to see
+% how the white balance pivot affects the overall look.
 rgb_wb = 0.09*rgb./repmat(wbpatch,[size(rgb,1),1]);
 
 % Visualize the resulting colors
@@ -104,8 +108,8 @@ figure;
 montage({mcc, mcc_wb}, 'BorderSize', [0 20], 'BackgroundColor', [0.9 0.9 0.9])
 
 %% Saving the figures:
-% This line saves the figure, change the image name as you see fit
-% Remember to change name when changing illuminant !!!!
+% Save the figure to your preferred folder. Use a descriptive filename
+% that encodes the camera and illuminant (e.g., 'Macbeth_Nikon_D65.png').
 save_path = 'change_to_your_path';
 saveas(gcf, fullfile(save_path, 'Macbeth_sim.png'));
 fprintf('Figure saved to %s\n', fullfile(save_path, 'Macbeth_sim.png'));
