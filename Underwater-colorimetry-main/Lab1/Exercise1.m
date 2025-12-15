@@ -31,7 +31,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % "YourPath" should point to the main folder that contains the Git repo
 % (Underwater-colorimetry-main) and your own RAW images. Example:
-%   YourPath = 'C:\Users\YourName\Documents';
+%   YourPath = 'C:\\Users\\YourName\\Documents';
 % On macOS/Linux use forward slashes:
 %   YourPath = '/Users/YourName/Documents';
 % Do NOT include the subfolders (\dng, \tiff, etc.) here—they are built
@@ -41,9 +41,9 @@ YourPath = 'yourpath...';
 % Build full paths to the folders used by the conversion scripts. If these
 % folders do not yet exist, create them manually or let MATLAB create them
 % when writing files.
-dngPath = fullfile(YourPath, '\dng');        % Folder containing .dng RAW files
-tiffSavePath = fullfile(YourPath, '\tiff');  % Output folder for 16-bit TIFF files
-CompresedPngPath = fullfile(YourPath, '\Cpng'); % Output folder for compressed PNGs
+dngPath = fullfile(YourPath, '\\dng');        % Folder containing .dng RAW files
+tiffSavePath = fullfile(YourPath, '\\tiff');  % Output folder for 16-bit TIFF files
+CompresedPngPath = fullfile(YourPath, '\\Cpng'); % Output folder for compressed PNGs
 
 % "stage" controls the processing steps inside the conversion pipeline.
 % Leave it at 4 unless instructed otherwise in the lecture.
@@ -51,7 +51,7 @@ stage = 4;
 
 % Change directory into the camera processing pipeline (provided in the
 % repository) so MATLAB can find the helper functions dng2tiff and tiff2png.
-cd(fullfile(YourPath, '\Underwater-colorimetry-main\camera-pipeline-nonUI-master'))
+cd(fullfile(YourPath, '\\Underwater-colorimetry-main\\camera-pipeline-nonUI-master'))
 
 % Convert all RAW files in "dngPath" to linear TIFFs in "tiffSavePath".
 % Each .dng becomes a .tiff file with minimal processing so the pixel
@@ -96,9 +96,9 @@ B = 2;
 % non-linear JPG, the second is the linear PNG.
 montage({B*I_Not_linear, B*I_linear})
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  You should see your linear and not linear images side by side.
-%  You can change brightness by changing the scalar B.
-%  If your images look clipped (too white) reduce B; if too dark increase.
-%  Pause and write down your observations about color and contrast
-%  differences—this will help during discussion in class.
+%    You should see your linear and not linear images side by side.
+%         You can change brightness by changing the scalar B.
+%    If your images look clipped (too white) reduce B; if too dark increase.
+%    Pause and write down your observations about color and contrast
+%    differences—this will help during discussion in class.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
