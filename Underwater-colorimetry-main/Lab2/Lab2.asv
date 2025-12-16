@@ -14,11 +14,6 @@
 
 clear all; close all; clc; 
 
-% Example to 'YourPath...' :
-% 'C:\Users\colorlab\Documents\GitHub\UWC_2025_Student_Repository\UW_Student_Repository\Underwater-colorimetry-main'
-Path_to_your_repository = 'YourPath...';
-addpath(genpath(Path_to_your_repository))
-
 %% Exercise 1: Quantitative color comparison 
 % Import all necessary data
 % Reflectance of the color chart
@@ -138,7 +133,7 @@ xy_image_canon = xyz_image_canon./sum(xyz_image_canon,2);
 %%%%%%%%%%%%%
 %%% Nikon %%%
 %%%%%%%%%%%%%
-% Select an achromatic patch to white balance.
+% Select an achromatic patch with which to white balance.
 % Let's pick the 23rd gray, with 9% reflectance but experiment with
 % different patches!
 wbpatch = rgb_nikon(23,:); 
@@ -159,13 +154,15 @@ xy_image_nikon = xyz_image_nikon./sum(xyz_image_nikon,2);
 % In these plots the Nikon and Canon are included,  %
 %         you need to ADD THE THIRD CAMERA          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure
+
+figure;
 plotChromaticity
 hold on
-plot(xy_image_nikon(:,1),xy_image_nikon(:,2),'go','linewidth',4, 'MarkerSize', 10)
-plot(xy_image_canon(:,1),xy_image_canon(:,2),'bs','linewidth',2, 'MarkerSize', 10)
-formatFigure
-title('Canon and Nikon Chromaticity plot', 'FontSize', 20, 'FontWeight','bold')
+plot(xy_image_nikon(:,1),xy_image_nikon(:,2),'go','linewidth',4)
+hold on
+plot(xy_image_canon(:,1),xy_image_canon(:,2),'bs','linewidth',2)
+title('Canon and Nikon Chromaticity plot')
+% Add legends for the cameras!
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%   Don't forget to add the third camera to the plot!   %%%%
@@ -176,8 +173,7 @@ title('Canon and Nikon Chromaticity plot', 'FontSize', 20, 'FontWeight','bold')
 % chromaticity diagram we drew
 hold on
 plot(xy_light(:,1),xy_light(:,2),'k^','markersize',10,'linewidth',3)
-legend({'', 'Nikon', 'Canon', 'White point'}, ...
-       'FontSize', 15, 'Location', 'southeast', 'Box','on')
+
 
 %% Exercise 4: XYZ to Standard RGB transformation
 

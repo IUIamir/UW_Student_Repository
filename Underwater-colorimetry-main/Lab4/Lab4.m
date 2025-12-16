@@ -20,7 +20,13 @@
 %      for the exercises. Run this section first so the rest of the       %
 %      script has every variable available.                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 clear all; close all; clc;
+
+% Example to 'YourPath...' :
+% 'C:\Users\colorlab\Documents\GitHub\UWC_2025_Student_Repository\UW_Student_Repository\Underwater-colorimetry-main'
+Path_to_your_repository = 'YourPath...';
+addpath(genpath(Path_to_your_repository))
 
 % Wavelength range: 400-700[nm]
 WL = 400:10:700;
@@ -345,7 +351,3 @@ for z = 0:50
           'Interpreter', 'latex', 'FontSize', 16)
     set(gca, 'Color', 'w');
 end
-
-
-
-

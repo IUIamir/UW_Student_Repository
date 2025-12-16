@@ -33,23 +33,23 @@
 %   automatically with fullfile below.                                    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear all; close all; clc;
-
-% Example to 'YourPath...' :
-% 'C:\Users\colorlab\Documents\GitHub\UWC_2025_Student_Repository\UW_Student_Repository\Underwater-colorimetry-main'
 Path_to_your_repository = 'YourPath...';
 addpath(genpath(Path_to_your_repository))
 
+YourPath = fullfile(Path_to_your_repository, ...
+    '\UWC_2025_Student_Repository\UW_Student_Repository\Underwater-colorimetry-main');
+
 %%
-dngPath = fullfile(Path_to_your_repository, '\Lab1\Images\dng');           % Folder containing .dng RAW files
-tiffSavePath = fullfile(Path_to_your_repository, '\Lab1\Images\tiff');     % Output folder for 16-bit TIFF files
-CompresedPngPath = fullfile(Path_to_your_repository, '\Lab1\Images\Cpng'); % Output folder for compressed PNGs
+dngPath = fullfile(YourPath, '\Lab1\Images\dng');           % Folder containing .dng RAW files
+tiffSavePath = fullfile(YourPath, '\Lab1\Images\tiff');     % Output folder for 16-bit TIFF files
+CompresedPngPath = fullfile(YourPath, '\Lab1\Images\Cpng'); % Output folder for compressed PNGs
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % "stage" controls the processing steps inside the conversion pipeline.   %
 % Leave it at 4 unless instructed otherwise in the lecture.               % 
 stage = 4;
 non_UI_path = '\camera-pipeline-nonUI-master';
-cd(fullfile(Path_to_your_repository, non_UI_path))
+cd(fullfile(YourPath, non_UI_path))
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -83,24 +83,22 @@ tiff2png(CompresedPngPath, tiffSavePath);
 %        Larger B makes the images brighter; smaller B makes them darker. %
 %        Start with B = 2 and adjust until both images are easy to compare.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Read the images. Keep file names in quotes and ensure the files are in  %
-% the current working directory or provide full paths.                    %
+% Read the images. Keep file names in quotes and ensure the files are in
+% the current working directory or provide full paths.
 I_linear = imread('non_linear_image.png');
 I_Not_linear = imread('non_linear_image.jpg');
 
-% Adjust brightness by multiplying the pixel values by scalar B. Use a    %
-% single value for both images so the comparison is fair.                 %
+% Adjust brightness by multiplying the pixel values by scalar B. Use a
+% single value for both images so the comparison is fair.
 B = 2;
 
-% Display the two images next to each other. The first entry is the       %
-% non-linear JPG, the second is the linear PNG.                           %
+% Display the two images next to each other. The first entry is the
+% non-linear JPG, the second is the linear PNG.
 montage({B*I_Not_linear, B*I_linear})
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%   - You should see your linear and not linear images side by side.      %
-%   - You can change brightness by changing the scalar B.                 %
-%   - If your images look clipped (too white) reduce B;                   % 
-%     if too dark increase.                                               %
-%   - Pause and write down your observations about color and contrast     %
-%     differences—this will help during discussion in class.              %
+%    You should see your linear and not linear images side by side.
+%         You can change brightness by changing the scalar B.
+%    If your images look clipped (too white) reduce B; if too dark increase.
+%    Pause and write down your observations about color and contrast
+%    differences—this will help during discussion in class.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

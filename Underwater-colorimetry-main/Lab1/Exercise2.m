@@ -8,7 +8,12 @@
 %                               Exercise 2                               %
 %                          Real Image Exercises                          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear all; close all;clc; warning off
+clear all; close all; clc;
+
+% Example to 'YourPath...' :
+% 'C:\Users\colorlab\Documents\GitHub\UWC_2025_Student_Repository\UW_Student_Repository\Underwater-colorimetry-main'
+Path_to_your_repository = 'YourPath...';
+addpath(genpath(Path_to_your_repository))
 
 %% LOAD A LINEAR PNG IMAGE THAT HAS A Color Chart IN THE SCENE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -60,10 +65,8 @@ neutralTarget = [89.57 57.76 35.15 19.44 9.08 3.43]./100;
 % corresponding patch.
 masks = makeChartMask(3*I,chart,colors,20);
 
-% Define where to save the masks. Use an **absolute path** or a path
-% relative to this script (e.g., 'Masks/' will create a folder inside
-% Lab1). Avoid spaces if you run into MATLAB path issues.
-savePath = 'Your_Path...';
+% Saving your masks to the Lab1 folder
+savePath = fullfile(Path_to_your_repository, '\Lab1');
 
 % Create the folder if it doesn't exist
 if ~isfolder(savePath)
@@ -83,7 +86,7 @@ fprintf('Masks struct has been saved to %s\n', saveFile);
 %% CHECK THE LINEARITY OF CAMERA RESPONSE
 % Purpose: validate that the PNG is still linear. For each gray patch we
 % compare the target Y (luminance) to measured RGB values. A straight line
-% through the origin indicates a linear camera response.
+% indicates a linear camera response.
 
 % Extract RGB patch values. Output dimensions: 3 x number_of_gray_patches.
 neutralValues = getPatchValues(I,masks,neutralPatches,colors);
