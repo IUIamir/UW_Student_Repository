@@ -181,8 +181,3 @@ fprintf('Figure saved to %s\n', fullfile(save_path, 'Macbeth_sim.png'));
 %                3. White Balanced image                                  %
 %                4. Not white balanced image                              %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%% Add titles for the figures! %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,16 +1,16 @@
 % June 8, 2023 modified January 22, 2024
 % Underwater Colorimetry Course @ IUI Eilat
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%                               Lab 2                                %%%
-%%%                    Basic Colorimetry Exercises                     %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  LAB 2:  
-%           Exercise 1: Quantitative color comparison 
-%           Exercise 2: RGB to XYZ transformation
-%           Exercise 3: xy white point coordinates
-%           Exercise 4: XYZ to Standard RGB transformation
-%           Exercise 5: RAW and JPG comparison (Bonus)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                               Lab 2                                 %%%
+%%%                    Basic Colorimetry Exercises                      %%%
+%%%                                                                     %%%
+%%%      - Exercise 1: Quantitative color comparison                    %%%
+%%%      - Exercise 2: RGB to XYZ transformation                        %%%
+%%%      - Exercise 3: xy white point coordinates                       %%% 
+%%%      - Exercise 4: XYZ to Standard RGB transformation               %%%
+%%%      - Exercise 5: RAW and JPG comparison (Bonus)                   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all; close all; clc; 
 
@@ -50,11 +50,11 @@ rgb_canon = getradiance(refl_spectra, light_spectra, canon.data(:,2:end));
 %%% Get the RGB values for the third camera you added %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                        Plot results                       %  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% This following plot includes only the Nikon and Canon %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                            Plot results                             %%%  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%       This following plot includes only the Nikon and Canon         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Red channel %
 subplot(3,1,1)
@@ -97,11 +97,11 @@ stdobs = importdata('data/CIEStandardObserver.csv');
 % Interpolate data to wavelength range  
 stdobs_spectra = interp1(stdobs(:,1),stdobs(:,2:4),WL);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                         Get XYZ values                               %
-%    This is similar to getting radiance values when using a camera,   %
-% with the only differnce of using the sensitivity of CIE std observer %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                            Get XYZ values                               %
+%     This is similar to getting radiance values when using a camera,     %
+%  with the only differnce of using the sensitivity of CIE std observer   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 XYZ = getradiance(refl_spectra, light_spectra, stdobs_spectra);
 
@@ -239,5 +239,9 @@ xlabel('Patch #')
 ylabel('Intensity')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%                                                       %%%%
 %%%%   Don't forget to add the third camera to the plot!   %%%%
+%%%%                                                       %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
