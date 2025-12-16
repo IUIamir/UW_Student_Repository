@@ -1,13 +1,13 @@
 % June 8, 2023 modified January 22, 2024
 % Underwater Colorimetry Course @ IUI Eilat
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                 Lab 1                                  %
-%       Basic Image Formation and RAW Image Manipulation Exercises       %
-%                                                                        %
-%                               Exercise 3                               %
-%                          Simulation Exercises                          %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                               Lab 1                                 %%%
+%%%     Basic Image Formation and RAW Image Manipulation Exercises      %%%
+%%%                                                                     %%%
+%%%                             Exercise 3                              %%%
+%%%                        Simulation Exercises                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear all; close all; clc;
 
 % Example to 'YourPath...' :
@@ -16,13 +16,14 @@ Path_to_your_repository = 'YourPath...';
 addpath(genpath(Path_to_your_repository))
 
 %% Step 1 - Simulate a Macbeth ColorChecker
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%       Use the function importdata to read the csv files.     %
-%   The importdata function will create a struct with fields:  %
-%     - data                                                   % 
-%     - textdata                                               %
-%     - rowheaders                                             %  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Use the function importdata to read the csv files.                    %
+%                                                                         % 
+%   The importdata function will create a struct with fields:             %
+%     - data                                                              % 
+%     - textdata                                                          %
+%     - rowheaders                                                        %  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 close all; clc;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Load the reflectances %%%
@@ -81,18 +82,18 @@ light_spectra_A = interp1(Illuminant_A.data(:,1),Illuminant_A.data(:,2),WL);
 %          - Row 2 = A
 light_spectra = [light_spectra_D65; light_spectra_A];
 
-             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-             %%% Calculate radiance for the ColorChecker %%%
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%% Calculate radiance for the ColorChecker %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This calculation is for a given illuminant and a given camera!!!        %
 % Example below uses Illuminant D65 (row 1) with Nikon (cam variable).    %
 % Swap to "Illuminant_index = 2;" when simulating Illuminant A.           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Illuminant_index = 1;
 rgb = getradiance( ...
     refl_spectra, ...
     light_spectra(Illuminant_index,:), ...
     cam.data(:,2:end));
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Visualize the resulting colors
 mcc = visualizeColorChecker(mat2gray(rgb));
@@ -104,9 +105,12 @@ else
     title('Color chart under illuminant A', 'FontSize', 20)
 end
 
-% This line saves the figure (uncomment to enable). Update the filename
-% to avoid overwriting when you switch illuminants or cameras.
+% The following line saves the figure (uncomment to enable): 
 % saveas(gcf,'data/Macbeth_no_wb.png');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%            Update the filename to avoid overwriting when                %
+%                 you switch illuminants or cameras.                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Select an achromatic (gray) patch with which to white balance.
 % Let's pick the 23rd gray, with 9% reflectance but experiment with

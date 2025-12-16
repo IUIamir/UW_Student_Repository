@@ -5,8 +5,8 @@
 %%%                               Lab 1                                 %%%
 %%%      Basic Image Formation and RAW Image Manipulation Exercises     %%%
 %%%                                                                     %%%
-%%%                             Exercise 2                              %%%
-%%%                        Real Image Exercises                         %%%
+%%%                               Exercise 2                            %%%
+%%%                          Real Image Exercises                       %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear all; close all; clc;
 
@@ -16,41 +16,34 @@ Path_to_your_repository = 'YourPath...';
 addpath(genpath(Path_to_your_repository))
 
 %% LOAD A LINEAR PNG IMAGE THAT HAS A Color Chart IN THE SCENE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Goal of this step: open a LINEAR image that includes a Macbeth color    %
-% chart somewhere in the frame.                                           %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% You should have 3 .png images saved from Exercise 1 or provided         %
-% by the instructors:                                                     %
-%    - Your image with a color chart                                      %
-%    - NikonImage.png (example camera)                                    %
-%    - CanonImage.png (example camera)                                    %
-%                                                                         %
-% Replace 'ConvertedImage.png' with one of these filenames.               %
-% The image must be linear!                                               %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Goal of this step: open a **linear** PNG that includes a Macbeth  %
+% color chart somewhere in the frame.                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% You should have 3 .png images saved from Exercise 1 or provided   %
+% by the instructors:                                               %
+%    - Your_image_with_a_color_chart.png (your own capture)         %
+%    - NikonImage.png (example camera)                              %
+%    - CanonImage.png (example camera)                              %
+% Replace 'ConvertedImage.png' with one of these filenames. The     %
+% image **must be linear** (gamma = 1) and contain the chart.       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 I = im2double(imread('ConvertedImage.png'));
 s = size(I);
-
 % Quick brightness boost (x2) so dark RAW conversions are visible
 % even on dim laptop screens. Feel free to adjust the factor.
-Brightness_factor = 2;
-figure;imshow(I*Brightness_factor)
+figure;imshow(I*2)
 title('Linear image','fontsize',20)
 
 %% LOAD COLOR CHART DATA
+% This example is given for a Macbeth ColorChecker. If you use a
+% different chart, swap the dataset accordingly.
 load MacbethColorCheckerData.mat
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%          This example is given for a Macbeth ColorChecker.              %
-%      If you use a different chart, swap the dataset accordingly.        % 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Location of grey patches in Macbeth ColorChecker:
+% Location of grey patches in Macbeth ColorChecker.
 neutralPatches = [4 1; 4 2; 4 3; 4 4; 4 5; 4 6];
 
-% Y value of grey patches of a Macbeth ColorChecker:
+% Y value of grey patches of a Macbeth ColorChecker.
 neutralTarget = [89.57 57.76 35.15 19.44 9.08 3.43]./100; 
 
 % Modify these to work for your color chart,

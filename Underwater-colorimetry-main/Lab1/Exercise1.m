@@ -1,15 +1,15 @@
 % June 8, 2023
 % Underwater Colorimetry Course @ IUI Eilat
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%                               Lab 1                                %%%
-%%%      RAW Image Manipulation Exercises and Basic Image Formation    %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                               Lab 1                                 %%%
+%%%      RAW Image Manipulation Exercises and Basic Image Formation     %%%
+%%%                                                                     %%%
+%%%                             Exercise 1                              %%%
+%%%                    Image Manipulatoin Exercises                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%                             Exercise 1                             %%%
-%%%                    Image Manipulatoin Exercises                    %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Part I: Converting RAW images
+%% Part 1: Converting RAW images
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % In this cell we will convert your image with a color chart and 2 other  %
 % images provided to you in the course GitHub.                            % 
@@ -20,10 +20,14 @@
 %          1) TIFF files                                                  %
 %          2) Compressed PNG files                                        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The 2 images from the Git are:                                          %
 %       (1) CanonImage                                                    %  
 %       (2) NikonImage                                                    %
 % Those are Raw images, convert them in the same way as your own image.   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Instructions:                                                         %
 %   Change 'yourpath...' to the appropriate path on your computer that    %
@@ -39,7 +43,7 @@ clear all; close all; clc;
 Path_to_your_repository = 'YourPath...';
 addpath(genpath(Path_to_your_repository))
 
-%%
+%% Part 1.1
 dngPath = fullfile(Path_to_your_repository, '\Lab1\Images\dng');           % Folder containing .dng RAW files
 tiffSavePath = fullfile(Path_to_your_repository, '\Lab1\Images\tiff');     % Output folder for 16-bit TIFF files
 CompresedPngPath = fullfile(Path_to_your_repository, '\Lab1\Images\Cpng'); % Output folder for compressed PNGs
@@ -63,7 +67,7 @@ dng2tiff(dngPath, tiffSavePath, stage);
 tiff2png(CompresedPngPath, tiffSavePath);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Part II: Show linear and non-linear image side by side
+%% Part 2: Show linear and non-linear image side by side
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % In this cell we show a linear and non-linear images side by side.       %
 % The goal is to visually compare how a camera's internal processing      %
