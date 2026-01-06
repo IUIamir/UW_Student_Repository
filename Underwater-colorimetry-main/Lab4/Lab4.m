@@ -161,10 +161,10 @@ set(gca, 'Color', 'w');
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Exercise 2: Direct signal (Dc) and Backscatter (Bc)                %%%
-%%%   Goal: separate the clean signal from the haze component. The     %%%
-%%%   montage shows (top to bottom) the total underwater image Ic,     %%%
-%%%   the direct component Dc, and the reference chart.                %%%
+%%% Exercise 2: Direct signal (Dc) and Backscatter (Bc)                 %%%
+%%%   Goal: separate the clean signal from the haze component. The      %%%
+%%%   montage shows (top to bottom) the total underwater image Ic,      %%%
+%%%   the direct component Dc, and the reference chart.                 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

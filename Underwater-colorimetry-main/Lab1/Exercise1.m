@@ -89,7 +89,7 @@ tiff2png(CompresedPngPath, tiffSavePath);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Read the images. Keep file names in quotes and ensure the files are in  %
 % the current working directory or provide full paths.                    %
-I_linear = imread('non_linear_image.png');
+I_linear = imread('linear_image.png');
 I_Not_linear = imread('non_linear_image.jpg');
 
 % Adjust brightness by multiplying the pixel values by scalar B. Use a    %

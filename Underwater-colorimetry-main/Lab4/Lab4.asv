@@ -14,13 +14,18 @@
 %       Exercise 4: RGB's (Ic) as function of viewing distance (z).       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+clear all; close all; clc;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Loading the required data:                                            %
 %      The lines below gather all spectra and coefficients you need       %
 %      for the exercises. Run this section first so the rest of the       %
 %      script has every variable available.                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear all; close all; clc;
+
+% Example to 'YourPath...' :
+% 'C:\Users\colorlab\Documents\GitHub\UWC_2025_Student_Repository\UW_Student_Repository\Underwater-colorimetry-main'
+Path_to_your_repository = 'YourPath...';
+addpath(genpath(Path_to_your_repository))
 
 % Wavelength range: 400-700[nm]
 WL = 400:10:700;
@@ -185,19 +190,20 @@ text(0.5, -0.04, subtitleText, 'Units', 'normalized', 'HorizontalAlignment', 'ce
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Exercise 3: Comparing the 8 different Jerlov water types          %%%
-%%%   Goal: visualize how optical properties vary from the clearest   %%%
-%%%   (type 1) to most turbid (type 8) waters. The script loops over  %%%
-%%%   all eight types while holding depth and distance fixed.         %%%
+% Exercise 3: Comparing the 8 different Jerlov water types                %
+%   Goal: visualize how optical properties vary from the clearest         %
+%   (type 1) to most turbid (type 8) waters. The script loops over        %
+%   all eight types while holding depth and distance fixed.               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%   Suggested exploration:                                          %%%
-%%%   * Adjust CompDepth/CompDistance to mimic shallow vs. deeper      %%%
-%%%     dives.                                                        %%%
-%%%   * Compare Ic (total signal) vs. Dc (direct signal) to see how    %%%
-%%%     scattering fills in dark regions.                             %%%
-%%%   * Note the montage ordering: top-left is clearest, bottom-right  %%%
-%%%     is most turbid.                                               %%%
+%   Suggested exploration:                                                %
+%    - Adjust CompDepth/CompDistance to mimic shallow vs. deeper          %
+%      dives.                                                             %
+%    - Compare Ic (total signal) vs. Dc (direct signal) to see how        %
+%      scattering fills in dark regions.                                  %
+%    - Note the montage ordering: top-left is clearest, bottom-right      %
+%      is most turbid.                                                    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialize an image array to store the 8 images
 % Use a cell array for storing the images
@@ -234,12 +240,12 @@ end
 Ic_montage = cat(4, Ic_array{:});
 Dc_montage = cat(4, Dc_array{:});
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Display the total signal Ic                                        %%%
-%%%   Shows the combined effect of backscatter and attenuation. Look  %%%
-%%%   for overall brightness loss and color shifts as turbidity        %%%
-%%%   increases across the montage.                                   %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display the total signal Ic                                             %
+%   Shows the combined effect of backscatter and attenuation. Look        % 
+%   for overall brightness loss and color shifts as turbidity             %
+%   increases across the montage.                                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure;
 montage(Ic_montage, 'Size', [2 4]);
 title('Comparsion of $I_c$ in 8 optically different water types from Jerlovs data-set', ...
@@ -247,12 +253,12 @@ title('Comparsion of $I_c$ in 8 optically different water types from Jerlovs dat
 text(0.5, -0.05, 'Up left - clearest waters ; Bottom right - most turbid waters', ...
     'Units', 'normalized', 'HorizontalAlignment', 'center', 'FontSize', 15)
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Display the direct signal Dc                                       %%%
-%%%   Removes the haze component so you can isolate how much signal    %%%
-%%%   actually reaches the camera. Comparing Ic vs. Dc illustrates    %%%
-%%%   how backscatter lifts shadows and desaturates colors.           %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display the direct signal Dc                                            %
+%   Removes the haze component so you can isolate how much signal         %
+%   actually reaches the camera. Comparing Ic vs. Dc illustrates          %
+%   how backscatter lifts shadows and desaturates colors.                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure;
 montage(Dc_montage, 'Size', [2 4]);
 title('Comparsion of $D_c$ in 8 optically different water types from Jerlovs data-set', ...
@@ -261,21 +267,23 @@ text(0.5, -0.05, 'Up left - clearest waters ; Bottom right - most turbid waters'
     'Units', 'normalized', 'HorizontalAlignment', 'center', 'FontSize', 15)
 
 %% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Exercise 4: RGB's (Dc, Bc) as function of viewing distance (z)    %%%
-%%%   Goal: see how moving the camera away increases path length and  %%%
-%%%   therefore attenuation/backscatter. z is the viewing distance    %%%
-%%%   you loop over.                                                  %%%
-%%%                                                                   %%%
-%%%   Steps:                                                         %%%
-%%%   1) Choose Water_Type and Depth below.                          %%%
-%%%   2) Pick a patch index (1-24) to track a specific color from    %%%
-%%%      the DGK chart.                                              %%%
-%%%   3) The loop sweeps z from 0 to 50 m. Watch how Dc decreases     %%%
-%%%      while Bc grows, and note channel-dependent losses.          %%%
-%%%   Optional: adjust the z range or add more legend text to report %%%
-%%%   the chosen patch color.                                        %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Exercise 4: RGB's (Dc, Bc) as function of viewing distance (z)          %
+%    Goal: see how moving the camera away increases path length and       %
+%    therefore attenuation/backscatter. z is the viewing distance         %
+%    you loop over.                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Steps:                                                                %
+%     1) Choose Water_Type and Depth below.                               %
+%     2) Pick a patch index (1-24) to track a specific color from         %
+%        the DGK chart.                                                   %
+%     3) The loop sweeps z from 0 to 50 m. Watch how Dc decreases         %
+%        while Bc grows, and note channel-dependent losses.               %
+%     Optional: adjust the z range or add more legend text to report      %
+%     the chosen patch color.                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Set parameters
 Water_Type = 2;
 Depth = 5;
@@ -342,7 +350,3 @@ for z = 0:50
           'Interpreter', 'latex', 'FontSize', 16)
     set(gca, 'Color', 'w');
 end
-
-
-
-
