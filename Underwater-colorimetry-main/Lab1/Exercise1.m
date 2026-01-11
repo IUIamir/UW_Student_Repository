@@ -65,7 +65,7 @@ dng2tiff(dngPath, tiffSavePath, stage);
 
 % Convert the TIFFs to compressed PNGs for easy viewing.                  % 
 tiff2png(CompresedPngPath, tiffSavePath);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %% Part 2: Show linear and non-linear image side by side
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -76,19 +76,18 @@ tiff2png(CompresedPngPath, tiffSavePath);
 %                                                                         %
 % Include here ONLY GoPro image                                           %
 %   .jpg image as an example for a NOT linear image (processed by camera) %
-%   .png image as an example for a linear image (from Part I TIFF output) %
+%   .png image as an example for a linear image                           %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Instructions:                                                         %
 %     1. Change non_linear_image.jpg to a .jpg image from your GoPro.     %
-%        This is the camera-generated photo, typically non-linear.        %
-%     2. Change linear_image.png to a .png image from your GoPro.         %
-%        Use the PNG created from the TIFF in Part I (linear data).       %
+%        This is the camera-generated photo, non-linear!                  %
+%     2. Change linear_image.png to a .png image,                         %
+%        use the PNG created from the TIFF in Part I (linear data).       %
 %     3. Try few different B values to see which brightness looks best.   %
 %        Larger B makes the images brighter; smaller B makes them darker. %
 %        Start with B = 2 and adjust until both images are easy to compare.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Read the images. Keep file names in quotes and ensure the files are in  %
-% the current working directory or provide full paths.                    %
+% Read the images.                                                        %
 I_linear = imread('linear_image.png');
 I_Not_linear = imread('non_linear_image.jpg');
 
