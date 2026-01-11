@@ -23,8 +23,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The 2 images from the Git are:                                          %
-%       (1) CanonImage                                                    %  
-%       (2) NikonImage                                                    %
+%       (1) CanonImage.CR2                                                %  
+%       (2) NikonImage.NEF                                                %
 % Those are Raw images, convert them in the same way as your own image.   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
