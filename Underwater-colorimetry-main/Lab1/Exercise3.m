@@ -24,7 +24,7 @@ addpath(genpath(Path_to_your_repository))
 %     - textdata                                                          %
 %     - rowheaders                                                        %  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-close all; clc;
+close all; clc; 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Load the reflectances %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
