@@ -42,28 +42,17 @@ clear all; close all; clc;
 % 'C:\Users\colorlab\Documents\GitHub\UWC_2025_Student_Repository\UW_Student_Repository\Underwater-colorimetry-main'
 Path_to_your_repository = 'YourPath...';
 addpath(genpath(Path_to_your_repository))
-
-%% Part 1.1
-dngPath = fullfile(Path_to_your_repository, '\Lab1\Images\dng');           % Folder containing .dng RAW files
-tiffSavePath = fullfile(Path_to_your_repository, '\Lab1\Images\tiff');     % Output folder for 16-bit TIFF files
-CompresedPngPath = fullfile(Path_to_your_repository, '\Lab1\Images\Cpng'); % Output folder for compressed PNGs
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% "stage" controls the processing steps inside the conversion pipeline.   %
-% Leave it at 4 unless instructed otherwise in the lecture.               % 
+dngPath = fullfile(Path_to_your_repository, '\Lab1\Images\dng');           % Folder containing .dng files
+tiffSavePath = fullfile(Path_to_your_repository, '\Lab1\Images\tiff');     % Output folder for .tif files
+CompresedPngPath = fullfile(Path_to_your_repository, '\Lab1\Images\Cpng'); % Output folder for compressed PNGs files
 stage = 4;
 non_UI_path = '\camera-pipeline-nonUI-master';
 cd(fullfile(Path_to_your_repository, non_UI_path))
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% After converting all RAW files to .dng, convert all .dng files in       %
-% "dngPath" to linear TIFFs and save them in "tiffSavePath".              % 
-% Each .dng becomes a .tiff file with minimal processing so the pixel     %
-% values stay linear with respect to light intensity.                     %
+% Convert all .dng files to linear .tif files                           
 dng2tiff(dngPath, tiffSavePath, stage);
 
-% Convert the TIFFs to compressed PNGs for easy viewing.                  % 
+% Convert the .tif to compressed PNGs 
 tiff2png(CompresedPngPath, tiffSavePath);
 
 
@@ -71,25 +60,24 @@ tiff2png(CompresedPngPath, tiffSavePath);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % In this cell we show a linear and non-linear images side by side.       %
 % The goal is to visually compare how a camera's internal processing      %
-% (gamma curves, tone mapping, sharpening) changes the appearance of an   %
-% image compared to the linear sensor output.                             %
+% changes the appearance of an image compared to the linear sensor output.%                            
 %                                                                         %
 % Include here ONLY GoPro image                                           %
 %   .jpg image as an example for a NOT linear image (processed by camera) %
-%   .png image as an example for a linear image                           %
+%   .png/.tif image as an example for a linear image                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Instructions:                                                         %
 %     1. Change non_linear_image.jpg to a .jpg image from your GoPro.     %
-%        This is the camera-generated photo, non-linear!                  %
-%     2. Change linear_image.png to a .png image,                         %
+%        This is the camera-generated photo, not-linear!                  %
+%     2. Change linear_image.png to a .png image/.tif image,              %
 %        use the PNG created from the TIFF in Part I (linear data).       %
 %     3. Try few different B values to see which brightness looks best.   %
 %        Larger B makes the images brighter; smaller B makes them darker. %
 %        Start with B = 2 and adjust until both images are easy to compare.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Read the images.                                                        %
+% Read the images.                                                        
 I_linear = imread('linear_image.png');
-I_Not_linear = imread('non_linear_image.jpg');
+I_Not_linear = imread('not_linear_image.jpg');
 
 % Adjust brightness by multiplying the pixel values by scalar B. Use a    %
 % single value for both images so the comparison is fair.                 %

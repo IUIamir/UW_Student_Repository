@@ -24,7 +24,7 @@ addpath(genpath(Path_to_your_repository))
 %     - textdata                                                          %
 %     - rowheaders                                                        %  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-close all; clc; 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Load the reflectances %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,6 +32,7 @@ close all; clc;
 % rows 2-25 are the patches of the ColorChecker.
 % Tip: keep this file in the Lab1/data folder so relative paths work.
 refl = importdata('data/MacbethColorCheckerReflectances.csv');
+
 % Inspect the data — pay attention that the wavelength range is 380:5:780.
 % This command will print out the wavelength range so you can confirm.
 refl.data(1,:)
@@ -77,10 +78,13 @@ light_spectra_D65 = interp1(Illuminant_D65.data(:,1),Illuminant_D65.data(:,2),WL
 % Illuminant-A
 light_spectra_A = interp1(Illuminant_A.data(:,1),Illuminant_A.data(:,2),WL);
 
-% Both illuminants D-65 and A: 
-%          - Row 1 = D65 
-%          - Row 2 = A
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Both illuminants D-65 and A: % 
+%    - Row 1 = D65             %
+%    - Row 2 = A               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 light_spectra = [light_spectra_D65; light_spectra_A];
+
 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%% Calculate radiance for the ColorChecker %%%
@@ -107,6 +111,7 @@ end
 
 % The following line saves the figure (uncomment to enable): 
 % saveas(gcf,'data/Macbeth_no_wb.png');
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %            Update the filename to avoid overwriting when                %
 %                 you switch illuminants or cameras.                      %

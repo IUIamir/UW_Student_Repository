@@ -32,7 +32,6 @@ addpath(genpath(Path_to_your_repository))
 % The image must be linear!                                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 I = im2double(imread('ConvertedImage.png'));
-s = size(I);
 
 % Quick brightness boost (x2) so dark RAW conversions are visible
 % even on dim laptop screens. Feel free to adjust the factor.
@@ -53,8 +52,10 @@ neutralPatches = [4 1; 4 2; 4 3; 4 4; 4 5; 4 6];
 % Y value of grey patches of a Macbeth ColorChecker:
 neutralTarget = [89.57 57.76 35.15 19.44 9.08 3.43]./100; 
 
-% Modify these to work for your color chart,
-% if different than a Macbeth ColorChecker.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       Modify these to work for your color chart, if different           %
+%                     than a Macbeth ColorChecker.                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% MAKE MASKS FOR THE PATCHES OF THE COLOR CHART
 % It places the masks for each patch on the image, and waits for the user 
