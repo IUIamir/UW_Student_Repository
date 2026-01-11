@@ -52,7 +52,7 @@ rgb_canon = getradiance(refl_spectra, light_spectra, canon.data(:,2:end));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%                            Plot results                             %%%  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                                                                     %%%
 %%%       This following plot includes only the Nikon and Canon         %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -112,11 +112,11 @@ xy_light = XYZ_light./sum(XYZ_light,2);
 % Recall that we also want the XYZ to be white balanced.
 XYZ_wb = XYZ./XYZ_light;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%             Camera space RGB to XYZ transformation              %%%
-%             Derive a 3x3 transform from white balanced              %
-%                  camera RGB to white balanced XYZ                   %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%               Camera space RGB to XYZ transformation                %%%
+%               Derive a 3x3 transform from white balanced                %
+%                    camera RGB to white balanced XYZ                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%
 %%% Canon %%%
@@ -128,7 +128,6 @@ wbpatch = rgb_canon(23,:);
 
 % perform simple white balancing for rgb
 rgb_wb_canon = 0.09*rgb_canon./repmat(wbpatch,[size(rgb_canon,1),1]);
-
 T_canon=XYZ_wb'*pinv(rgb_wb_canon)';
 xyz_image_canon = (T_canon*rgb_wb_canon')';
 
