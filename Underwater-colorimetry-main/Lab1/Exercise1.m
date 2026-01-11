@@ -44,7 +44,7 @@ Path_to_your_repository = 'YourPath...';
 addpath(genpath(Path_to_your_repository))
 dngPath = fullfile(Path_to_your_repository, '\Lab1\Images\dng');           % Folder containing .dng files
 tiffSavePath = fullfile(Path_to_your_repository, '\Lab1\Images\tiff');     % Output folder for .tif files
-CompresedPngPath = fullfile(Path_to_your_repository, '\Lab1\Images\Cpng'); % Output folder for compressed PNGs files
+CompresedPngPath = fullfile(Path_to_your_repository, '\Lab1\Images\Cpng'); % Output folder for compressed PNG files
 stage = 4;
 non_UI_path = '\camera-pipeline-nonUI-master';
 cd(fullfile(Path_to_your_repository, non_UI_path))
