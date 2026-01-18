@@ -1,0 +1,53 @@
+function Kd = Estimate_Kd(filtered_light_profile, filtered_depth, Evaluation_depth, wl, poly_deg)
+COPS_wl = [313, 330, 340, 380, 395, 412, 443, 465, 490, 510, 532, 555, ...
+    565, 589, 625, 665, 683, 710, 765];
+
+z = filtered_depth';
+EvalDepth = find(round(filtered_depth) == Evaluation_depth, 1);
+EvalDepth = z(EvalDepth);
+vQnoisy = filtered_light_profile';
+vKd2  = zeros(19, 1);
+
+n = 19;
+colors = hsv(n);
+figure
+subplot(1,2,1)
+hold on
+for i = 1:19
+    plot(vQnoisy(i,:), z, 'k', 'LineWidth', 2)
+    pQ = polyfit(z, vQnoisy(i,:), poly_deg);
+    vQ = polyval(pQ, z);
+    plot(vQ, z, 'LineWidth', 2, 'Color', colors(i,:))
+    pKd = -polyder(pQ);
+    vKd2(i) = polyval(pKd, EvalDepth);
+end
+
+ylabel('Depth [m]', 'Interpreter', 'latex', 'FontSize', 20)
+xlabel('$\ln \big(\frac{E_0}{E_d} \big)$', 'Interpreter', 'latex', 'FontSize', 20)
+set(gca,'YDir','reverse','LineWidth',2.5)
+set(gca,'Color','w')
+f = gcf;
+set(f,'InvertHardcopy','off')
+set(f,'Units','normalized')
+set(f,'OuterPosition',[0 0 1 1])
+axis square
+set(gcf,'Color','w')
+
+Kd = -vKd2;
+Kd = interp1(COPS_wl, Kd, wl)';
+
+subplot(1,2,2)
+hold on
+plot(wl, Kd, "LineWidth", 3)
+ylabel('Attenuation [$m^{-1}$]', 'Interpreter', 'latex', 'FontSize', 20)
+xlabel('$\lambda$', 'Interpreter', 'latex', 'FontSize', 20)
+set(gca,'LineWidth',2.5)
+set(gca,'Color','w')
+f = gcf;
+set(f,'InvertHardcopy','off')
+set(f,'Units','normalized')
+set(f,'OuterPosition',[0 0 1 1])
+axis square
+set(gcf,'Color','w')
+
+end
